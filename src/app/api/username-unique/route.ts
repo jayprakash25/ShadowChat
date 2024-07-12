@@ -46,7 +46,7 @@ export async function GET(request: Request) {
             return Response.json(
                 {
                     success: false,
-                    message: 'Invalid query parameter'
+                    message: 'username already in use'
                 }, 
                 {
                     status: 400
@@ -59,7 +59,7 @@ export async function GET(request: Request) {
         return Response.json(
             {
                 success: true,
-                message: 'username '
+                message: 'username is unique'
             },
             {
                 status: 200
