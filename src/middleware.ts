@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import  { NextRequest } from "next/server";
 export { default } from "next-auth/middleware";
 import { getToken } from "next-auth/jwt";
 
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   const url = request.nextUrl;
@@ -15,13 +14,18 @@ export async function middleware(request: NextRequest) {
       url.pathname.startsWith("/verify") ||
       url.pathname.startsWith("/"))
   ) {
+    console.log("token there")
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  return NextResponse.redirect(new URL("/home", request.url));
+  // return NextResponse.redirect(new URL("/home", request.url));
+  if(!token && url.pathname.startsWith('/dashboard')){
+    console.log("token not there")
+    return NextResponse.redirect(new URL('/signin', request.url))
+  }
 }
 
-// See "Matching Paths" below to learn more
+// See "Matching Paths" 
 export const config = {
-  matcher: ["/sigin", "/signup", "/", "/dashboard/:path*", "/verify/:path*"],
+  matcher: ["/sigin", "/sign-up", "/", "/dashboard/:path*", "/verify/:path*"],
 };
