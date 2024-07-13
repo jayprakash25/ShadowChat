@@ -171,8 +171,8 @@ const SignUp = () => {
           </form>
         </Form>
         <div className="text-center mt-4">
-          Already a member?
-          <Link href={"/sign-in"} className="text-blue-600 hover:text-blue-800">
+          Already a member? {" "}
+          <Link href={"/signin"} className="text-blue-600 hover:text-blue-800">
             Signin
           </Link>
         </div>

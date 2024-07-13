@@ -30,7 +30,7 @@ export default function VerifyAccount() {
     try {
       const response = await axios.post<ApiResponse>(`/api/verify-code`, {
         username: params.username,
-        code: data.code,
+        code: data.verifyCode,
       });
 
       toast({
@@ -63,7 +63,7 @@ export default function VerifyAccount() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
-              name="code"
+              name="verifyCode"
               control={form.control}
               render={({ field }) => (
                 <FormItem>
