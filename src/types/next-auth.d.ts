@@ -2,7 +2,7 @@ import "next-auth";
 
 declare module "next-auth" {
   interface User {
-    _id?: String;
+    _id?: string;
     isVerified?: boolean;
     isAcceptingMessage?: boolean;
     username?: String;

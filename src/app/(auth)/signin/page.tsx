@@ -50,7 +50,7 @@ const SignUp = () => {
     if (result?.error) {
       toast({
         title: "Login Failed",
-        description: "Incorrect Username or password",
+        description: result.error,
         variant: "destructive",
       });
     }

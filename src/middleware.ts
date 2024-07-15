@@ -7,25 +7,28 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   const url = request.nextUrl;
 
-  if (
-    token &&
-    (url.pathname.startsWith("/signin") ||
-      url.pathname.startsWith("/signup") ||
-      url.pathname.startsWith("/verify") ||
-      url.pathname.startsWith("/"))
-  ) {
-    console.log("token there")
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+  if (token) {
+    if (
+      url.pathname === "/signin" ||
+      url.pathname === "/sign-up" ||
+      url.pathname === "/verify" ||
+      url.pathname === "/"
+    ) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+
+  } else {
+    // Redirect unauthenticated users away from protected pages
+    if (url.pathname.startsWith('/dashboard')) {
+      return NextResponse.redirect(new URL('/signin', request.url));
+    }
   }
 
-  // return NextResponse.redirect(new URL("/home", request.url));
-  if(!token && url.pathname.startsWith('/dashboard')){
-    console.log("token not there")
-    return NextResponse.redirect(new URL('/signin', request.url))
-  }
+
+  return NextResponse.next()
 }
 
 // See "Matching Paths" 
 export const config = {
-  matcher: ["/sigin", "/sign-up", "/", "/dashboard/:path*", "/verify/:path*"],
+  matcher: ["/signin", "/sign-up", "/", "/dashboard/:path*", "/verify/:path*"],
 };

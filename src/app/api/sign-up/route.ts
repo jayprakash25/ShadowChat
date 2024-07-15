@@ -28,7 +28,8 @@ export async function POST(request: Request) {
       email,
     });
 
-    const verifyCode = Math.floor(100000 + Math.random() * 9000000).toString();
+    const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+    console.log(verifyCode)
 
     if (existingUserByEmail) {
       if (existingUserByEmail.isVerified) {

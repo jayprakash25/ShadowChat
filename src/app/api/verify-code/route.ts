@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       return Response.json(
         {
           success: true,
-          message: "User Saved",
+          message: "User Successfully Created",
         },
         { status: 200 }
       );
