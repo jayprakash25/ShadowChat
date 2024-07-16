@@ -185,7 +185,7 @@ const Dashboard = () => {
           <MessageCard
             key={message._id}
             message={message}
-            onMessageDelete={handleDeleteMessage}
+            onMessageDelete={handleDelete}
           />
         ))
       ) : (

@@ -25,12 +25,12 @@ export async function GET(request: Request) {
   try {
     const user = await UserModel.aggregate([
       { $match: { id: userId } },
-      { $unwind: "messages" },
+      { $unwind: "$message" },
       { $sort: { "messages.createdAt": -1 } },
-      { $group: { _id: "$_id", messages: { $push: "$messages" } } },
+      { $group: { _id: "$_id", message: { $push: "$message" } } },
     ]);
 
-    if (!user || user.length === 0) {
+    if (!user) {
       return Response.json(
         {
           success: false,
@@ -45,7 +45,7 @@ export async function GET(request: Request) {
     return Response.json(
       {
         success: true,
-        message: user[0].messages,
+        message: user[0].message,
       },
       { status: 200 }
     );
