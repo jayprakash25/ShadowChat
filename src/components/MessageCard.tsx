@@ -34,7 +34,8 @@ const MessageCard = ({message, onMessageDelete}: MessageCardProps) => {
 
     const {toast} = useToast();
     const handleDelete = async() => {
-          const result = await  axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
+        console.log(message)
+          const result = await axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
           toast({
             title: result.data.message,
         })
@@ -50,16 +51,14 @@ const MessageCard = ({message, onMessageDelete}: MessageCardProps) => {
     <div>
       <Card>
         <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <AlertDialogBox/>
-          <CardDescription>Card Description</CardDescription>
+          <div className="flex w-full justify-between">
+          <CardTitle>Message</CardTitle>
+          <AlertDialogBox handleDelete={handleDelete} />
+          </div>
         </CardHeader>
         <CardContent>
-          <p>Card Content</p>
+          <p className="font-semibold">{message.content}</p>
         </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
       </Card>
 
       
@@ -71,12 +70,12 @@ const MessageCard = ({message, onMessageDelete}: MessageCardProps) => {
 export default MessageCard;
 
 
-const AlertDialogBox = () => {
+const AlertDialogBox = ({handleDelete}: {handleDelete: () => void}) => {
     
     return (
         <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive"><X className="w-5 h-5"/></Button>
+        <Button variant="destructive" className="w-8 p-2 h-8"><X className=""/></Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

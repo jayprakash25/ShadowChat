@@ -24,12 +24,12 @@ export async function GET(request: Request) {
 
   try {
     const user = await UserModel.aggregate([
-      { $match: { id: userId } },
+      { $match: { _id: userId } },
       { $unwind: "$message" },
-      { $sort: { "messages.createdAt": -1 } },
+      { $sort: { "message.createdAt": -1 } },
       { $group: { _id: "$_id", message: { $push: "$message" } } },
     ]);
-
+ 
     if (!user) {
       return Response.json(
         {
@@ -42,10 +42,24 @@ export async function GET(request: Request) {
       );
     }
 
+    console.log(user[0])
+
+    if(!user[0].message) {
+      return Response.json(
+        {
+          success: true,
+          message: "No messages found",
+        },
+        {
+          status: 200,
+        }
+      );
+    }
+
     return Response.json(
       {
         success: true,
-        message: user[0].message,
+        messages: user[0].message,
       },
       { status: 200 }
     );

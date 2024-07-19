@@ -20,7 +20,7 @@ const Dashboard = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
-
+console.log(messages)
   const {toast} = useToast();
 
   const handleDelete = (messageId: string) => {
@@ -183,7 +183,7 @@ const Dashboard = () => {
       {messages.length > 0 ? (
         messages.map((message, index) => (
           <MessageCard
-            key={message._id}
+            key={index}
             message={message}
             onMessageDelete={handleDelete}
           />

@@ -15,11 +15,11 @@ const Navbar = () => {
   return (
     <nav className='p-4 md:p-6 shadow-md'>
         <div className='flex flex-col md:flex-row justify-between items-center'>
-        <a href='#'>Shadow Chat</a>
+        <a href='#' className='font-semibold'>Shadow Chat</a>
         {
             session ? (
                 <>
-                <span>Welcome, {user.username || user.email}</span>
+                <span className='font-semibold'>Welcome, {user.username || user.email}</span>
                 <Button className='w-full md:w-auto' onClick={() => {signOut()}}>Log-Out</Button>
                 </>
             ) : (
