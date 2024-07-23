@@ -75,7 +75,8 @@ const SignUp = () => {
         title: "Success",
         description: response.data.message,
       });
-      await router.replace(`/verify/${username}`);
+      // await router.replace(`/verify/${username}`);
+      await router.replace('/dashboard');
       setIsSubmitted(false);
     } catch (error) {
       console.log("Error in signup", error);
@@ -86,6 +87,8 @@ const SignUp = () => {
         description: errorMessage,
         variant: "destructive",
       });
+    }finally{
+      setIsSubmitted(false);
     }
   };
 

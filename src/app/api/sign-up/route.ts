@@ -1,4 +1,4 @@
-import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
+// import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 import dbConnection from "@/lib/db";
 import UserModel from "@/model/User";
 import bcrypt from "bcryptjs";
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
         password: hashedPassword,
         verifyCode,
         verifyCodeExpiry: expiryDate,
-        isVerified: false,
+        isVerified: true,
         isAcceptingMessage: true,
         message: [],
       });
@@ -67,17 +67,17 @@ export async function POST(request: Request) {
     }
 
     //    send verification email
-    const sendEmail = await sendVerificationEmail(email, username, verifyCode);
+    // const sendEmail = await sendVerificationEmail(email, username, verifyCode);
 
-    if (!sendEmail.success) {
-      return Response.json(
-        {
-          success: false,
-          message: sendEmail.message,
-        },
-        { status: 500 }
-      );
-    }
+    // if (!sendEmail.success) {
+    //   return Response.json(
+    //     {
+    //       success: false,
+    //       message: sendEmail.message,
+    //     },
+    //     { status: 500 }
+    //   );
+    // }
 
     return Response.json(
       {

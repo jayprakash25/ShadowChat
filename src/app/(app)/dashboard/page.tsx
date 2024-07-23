@@ -189,7 +189,7 @@ console.log(messages)
           />
         ))
       ) : (
-        <p>No messages to display.</p>
+        <p>Congratulations! You’ve won the award for <span className='font-semibold'>‘Most Empty Message Inbox.’</span></p>
       )}
     </div>
   </div>

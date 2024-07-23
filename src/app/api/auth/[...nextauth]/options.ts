@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
             return user;
           } else {
             throw new Error("Password is wrong!");
-          }
+          } 
         } catch (error: any) {
           throw new Error(error);
         }
